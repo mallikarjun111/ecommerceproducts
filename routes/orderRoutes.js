@@ -22,7 +22,7 @@ router.post('/', auth, async (req, res) => {
     }
 
     const order = new Order({
-      userId: req.user.id,
+      userId: req.user._id,
       products,
       totalAmount
     });
@@ -47,7 +47,7 @@ router.post('/', auth, async (req, res) => {
  */
 router.get('/', auth, async (req, res) => {
   try {
-    const orders = await Order.find({ userId: req.user.id });
+    const orders = await Order.find({ userId: req.user._id });
 
     res.json({
       count: orders.length,
